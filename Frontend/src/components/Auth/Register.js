@@ -8,7 +8,6 @@ import { MyTextInput } from "../../shared/MyTextInput";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
@@ -36,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Register = () => {
+export const Register = (props) => {
   const classes = useStyles();
   return (
     <Formik
@@ -69,11 +68,8 @@ export const Register = () => {
           })
           .required("Required"),
       })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+      onSubmit={(values) => {
+        props.register(values);
       }}
     >
       {(formik) => (
@@ -159,11 +155,11 @@ export const Register = () => {
                     <div id="my-radio-group">Gender</div>
                     <div role="group" aria-labelledby="my-radio-group">
                       <label>
-                        <Field type="radio" name="gender" value="One" />
+                        <Field type="radio" name="gender" value="Male" />
                         Male
                       </label>
                       <label>
-                        <Field type="radio" name="gender" value="Two" />
+                        <Field type="radio" name="gender" value="Female" />
                         Female
                       </label>
                     </div>

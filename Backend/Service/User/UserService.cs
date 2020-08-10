@@ -31,14 +31,14 @@ namespace Service.User
             this.appSettings = appSettings.Value;
         }
 
-        public async Task<IUserModel> Authenticate(string username, string password)
+        public async Task<IUserModel> Authenticate(string email, string password)
         {
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
                 return null;
             }
 
-            var user = await userRepository.GetUserAsync(username);
+            var user = await userRepository.GetUserAsync(email);
 
             if (user == null)
             {
@@ -92,7 +92,7 @@ namespace Service.User
                 throw new AppException("Password is required");
             }
 
-            if (await userRepository.CheckIfExistAsync(user.UserName))
+            if (await userRepository.CheckIfExistAsync(user.UserName, user.Email))
             {
                 throw new AppException("Username \"" + user.UserName + "\" is already taken");
             }

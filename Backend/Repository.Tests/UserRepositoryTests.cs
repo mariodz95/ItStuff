@@ -103,7 +103,7 @@ namespace Repository.Tests
             {
                 var userRepository = new UserRepository(context, mapper);
 
-                var user = await userRepository.CheckIfExistAsync("Name 1");
+                var user = await userRepository.CheckIfExistAsync("Name 1", "email");
 
                 Assert.NotNull(user);
             }

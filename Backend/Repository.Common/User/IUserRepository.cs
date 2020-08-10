@@ -10,7 +10,7 @@ namespace Repository.Common.User
     {
         Task<IUserModel> GetUserAsync(string username);
         Task<UserEntity> GetByIdAsync(Guid id);
-        Task<bool> CheckIfExistAsync(string name);
+        Task<bool> CheckIfExistAsync(string name, string email);
         Task<IUserModel> CreateAsync(IUserModel user);
         Task<IEnumerable<IUserModel>> GetAllAsync();
         Task<IUserModel> DeleteAsync(Guid id);

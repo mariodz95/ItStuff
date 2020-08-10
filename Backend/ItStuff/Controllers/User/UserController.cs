@@ -29,11 +29,11 @@ namespace ItStuff.Controllers
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] AuthenticateViewModel model)
         {
-            var user = await userService.Authenticate(model.Username, model.Password);
+            var user = await userService.Authenticate(model.Email, model.Password);
 
             if (user == null)
             {
-                return BadRequest(new { message = "Username or password is incorrect" });
+                return BadRequest(new { message = "Email or password is incorrect" });
             }
 
             user.Token = userService.GetToken(user);

@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.scss";
-import Auth from "./components/Auth/Auth";
+import { Auth } from "./components/Auth/Auth";
 import { NavigationBar } from "./components/Navigation/NavigationBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { history } from "./helpers/history";

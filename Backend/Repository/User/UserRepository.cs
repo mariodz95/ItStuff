@@ -21,9 +21,9 @@ namespace Repository.User
             this.mapper = mapper;
         }
 
-        public async Task<IUserModel> GetUserAsync(string username)
+        public async Task<IUserModel> GetUserAsync(string email)
         {
-            var user = await context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.UserName == username);
+            var user = await context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email == email);
             user.UserRole = await context.UserRole.AsNoTracking().FirstOrDefaultAsync(u => u.UserId == user.Id);
             return mapper.Map<IUserModel>(user);
         }
@@ -42,10 +42,21 @@ namespace Repository.User
             return user;
         }
 
-        public async Task<bool> CheckIfExistAsync(string name)
+        public async Task<bool> CheckIfExistAsync(string name, string email)
         {
-            var exist = await context.Users.AnyAsync(u => u.UserName == name);
-            return exist;
+            var existUsername = await context.Users.AnyAsync(u => u.UserName == name);
+            if(existUsername == true)
+            {
+                return true;
+            }
+
+            var existEmail = await context.Users.AnyAsync(u => u.Email == email);
+            if (existEmail == true)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public async Task<IEnumerable<IUserModel>> GetAllAsync()

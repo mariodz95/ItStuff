@@ -5,8 +5,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router";
 import Grid from "@material-ui/core/Grid";
+import { history } from "../../helpers/history";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,12 +24,12 @@ const linkStyle = {
 
 const noPointer = { cursor: "pointer" };
 
-export const NavigationBar = () => {
+export const NavigationBar = (props) => {
   const classes = useStyles();
-  const history = useHistory();
+  const user = localStorage.getItem("user");
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar style={{ background: "#2E3B55" }} position="static">
         <Toolbar>
           <Grid justify="space-between" container>
             <Typography
@@ -41,21 +41,56 @@ export const NavigationBar = () => {
             >
               ItStuff
             </Typography>
+            {user !== null ? (
+              <Link style={linkStyle}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.menuButton}
+                >
+                  Sell Item
+                </Button>
+                <Link style={linkStyle}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.menuButton}
+                  >
+                    My Profile
+                  </Button>
+                </Link>
+              </Link>
+            ) : null}
           </Grid>
-          <Link style={linkStyle} to="/login">
+          {user === null ? (
+            <React.Fragment>
+              <Link style={linkStyle} to="/login">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.menuButton}
+                >
+                  Login
+                </Button>
+              </Link>
+              <Link style={linkStyle} to="/register">
+                <Button variant="contained" color="primary">
+                  Register
+                </Button>
+              </Link>
+            </React.Fragment>
+          ) : (
             <Button
               variant="contained"
+              onClick={() => {
+                localStorage.removeItem("user");
+                history.push("/");
+              }}
               color="primary"
-              className={classes.menuButton}
             >
-              Login
+              Logout
             </Button>
-          </Link>
-          <Link style={linkStyle} to="/register">
-            <Button variant="contained" color="primary">
-              Register
-            </Button>
-          </Link>
+          )}
         </Toolbar>
       </AppBar>
     </div>

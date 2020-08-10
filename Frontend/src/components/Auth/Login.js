@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Login = () => {
+export const Login = (props) => {
   const classes = useStyles();
 
   return (
@@ -47,11 +47,8 @@ export const Login = () => {
           .min(6, "Must be 6 character or more")
           .required("Required"),
       })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+      onSubmit={(values) => {
+        props.login(values);
       }}
     >
       {(formik) => (
