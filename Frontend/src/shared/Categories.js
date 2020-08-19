@@ -6,7 +6,7 @@ import keyboard from "./icons/keyboard.png";
 import mouse from "./icons/mouse.png";
 import monitor from "./icons/monitor.png";
 
-export const Categories = [
+export const categories = [
   { name: "PC's", img: pc },
   { name: "Laptop's", img: laptop },
   { name: "Camera's", img: camera },

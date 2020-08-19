@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Common.Helper;
-using DAL.Entities;
 using ItStuff.Helper;
 using ItStuff.Model.User;
 using Microsoft.Extensions.Options;
@@ -75,7 +74,7 @@ namespace Service.User
 
         public async Task<IEnumerable<IUserModel>> GetAllAsync()
         {
-            return  await userRepository.GetAllAsync();
+            return await userRepository.GetAllAsync();
         }
 
         public async Task<IUserModel> GetByIdAsync(Guid id)
@@ -113,7 +112,7 @@ namespace Service.User
                 DateCreated = DateTime.Now,
                 Name = Role.User,
                 UserId = user.Id,
-            }; 
+            };
 
             user.UserRole = userRole;
             await userRepository.CreateAsync(user);

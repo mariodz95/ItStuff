@@ -42,7 +42,7 @@ export const NavigationBar = (props) => {
               ItStuff
             </Typography>
             {user !== null ? (
-              <Link style={linkStyle}>
+              <Link style={linkStyle} to="/product">
                 <Button
                   variant="contained"
                   color="primary"
@@ -50,15 +50,6 @@ export const NavigationBar = (props) => {
                 >
                   Sell Item
                 </Button>
-                <Link style={linkStyle}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.menuButton}
-                  >
-                    My Profile
-                  </Button>
-                </Link>
               </Link>
             ) : null}
           </Grid>

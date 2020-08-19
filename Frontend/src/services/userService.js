@@ -30,6 +30,5 @@ function register(model) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(model),
   };
-
   return fetch(`${url}user/register`, requestOptions).then(handleResponse);
 }

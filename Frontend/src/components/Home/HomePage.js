@@ -1,6 +1,6 @@
 import React from "react";
 import { SimpleCard } from "../../shared/SimpleCard";
-import { Categories } from "./Categories";
+import { categories } from "../../shared/Categories";
 import { Grid } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -25,7 +25,7 @@ export const HomePage = () => {
         justify="flex-start"
         alignItems="flex-start"
       >
-        {Categories.map((item) => {
+        {categories.map((item) => {
           return (
             <Grid item xs={12} sm={6} md={3}>
               <SimpleCard name={item.name} image={item.img}></SimpleCard>

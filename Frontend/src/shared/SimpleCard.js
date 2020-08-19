@@ -22,7 +22,7 @@ export const SimpleCard = (props) => {
     <Card
       className={classes.root}
       onClick={() => {
-        console.log("test");
+        console.log("test", props.name);
       }}
     >
       <CardContent>

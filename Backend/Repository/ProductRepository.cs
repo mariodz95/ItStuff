@@ -3,6 +3,7 @@ using DAL;
 using DAL.Entities;
 using Model.Common;
 using Repository.Common;
+using System;
 using System.Threading.Tasks;
 
 namespace Repository
@@ -24,6 +25,17 @@ namespace Repository
             await context.Product.AddAsync(newProduct);
             await context.SaveChangesAsync();
             return product;
+        }
+
+        public async Task<IProductImageModel> AddImagesAsync(byte[] file, Guid id)
+        {
+            var image = new ProductImageEntity();
+            image.Id = Guid.NewGuid();
+            image.ProductId = id; 
+            image.ImageData = file;
+            await context.ProductImage.AddAsync(image);
+            await context.SaveChangesAsync();
+            return mapper.Map<IProductImageModel>(image);
         }
     }
 }

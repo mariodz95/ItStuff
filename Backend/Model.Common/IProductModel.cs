@@ -9,7 +9,7 @@ namespace Model.Common
     {
         string Name { get; set; }
         string Description { get; set; }
-        float Price { get; set; }
+        string Price { get; set; }
         string Location { get; set; }
         string PhoneNumber { get; set; }
         Guid UserId { get; set; }
