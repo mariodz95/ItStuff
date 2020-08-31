@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using Common.Interface_Sort_Pag_Flt;
+using Common.Sort_Pag_Flt;
 using ItStuff.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using Nancy.Json;
 using Service.Common;
 using System;
 using System.Collections.Generic;
@@ -28,7 +31,6 @@ namespace ItStuff.Controllers
         }
 
         [Authorize(Roles = "User,Admin")]
-        [AllowAnonymous]
         [HttpPost("[action]")]
         public async Task<IActionResult> Create(IFormCollection data, [FromForm(Name = "body")] IList<IFormFile> formData)
         {
@@ -40,6 +42,7 @@ namespace ItStuff.Controllers
             product.Name = Regex.Replace(data["title"], @"(\[|""|\])", "");
             product.Description = Regex.Replace(data["description"], @"(\[|""|\])", "");
             product.Price = Regex.Replace(data["price"], @"(\[|""|\])", "");
+            product.Category = Regex.Replace(data["category"], @"(\[|""|\])", "");
             product.UserId = new Guid(userId);
 
             var newProduct = await productService.CreateAsync(product, formData);
@@ -47,5 +50,39 @@ namespace ItStuff.Controllers
             return Ok(mapper.Map<ProductViewModel>(newProduct));
         }
 
+        [AllowAnonymous]
+        [HttpGet("getproduct/{productId}")]
+        public async Task<IActionResult> GetProduct(Guid productId)
+        {
+            var product = await productService.GetProductAsync(productId);
+
+            return Ok(product);
+        }
+
+        //[AllowAnonymous]
+        //[HttpGet("getall/{pageNumber}&{pageSize}/{search?}")]
+        //public async Task<IActionResult> GetAll(int pageNumber = 0, int pageSize = 10, string search = null, string sort = null)
+        //{
+        //    IFiltering filtering = new Filtering
+        //    {
+        //        FilterValue = search
+        //    };
+
+        //    ISorting sorting = new Sorting
+        //    {
+        //        SortOrder = sort
+        //    };
+
+        //    IPaging paging = new Paging
+        //    {
+        //        PageNumber = pageNumber,
+        //        PageSize = pageSize,
+        //        TotalPages = 0
+        //    };
+
+        //    var products = await productService.GetAllAsync(paging, filtering, sorting);
+        //    var mapProjects = mapper.Map<IEnumerable<ProductViewModel>>(products);
+        //    return Ok(new { products = mapProjects, totalPages = paging.TotalPages });
+        //}
     }
 }

@@ -13,9 +13,9 @@ namespace Model
         public string Price { get; set; }
         public string Location { get; set; }
         public string PhoneNumber { get; set; }
+        public string Category { get; set; }
         public Guid UserId { get; set; }
         public IUserModel User { get; set; }
         public List<IProductImageModel> Images { get; set; }
-        public IProductCategoryModel ProductCategory { get; set; }
     }
 }

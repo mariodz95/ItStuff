@@ -10,33 +10,33 @@ import * as Yup from "yup";
 import ImageUploader from "react-images-upload";
 import { categories } from "../../shared/Categories";
 import Select from "react-select";
+import { makeStyles } from "@material-ui/core/styles";
 
-// const options = [
-//   { value: "chocolate", label: "Chocolate" },
-//   { value: "strawberry", label: "Strawberry" },
-//   { value: "vanilla", label: "Vanilla" },
-// ];
-
-const listCategories = categories.map((category) => <li>{category.name}</li>);
-const options = categories;
+const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: theme.spacing(10, 3),
+  },
+}));
 
 const ProductForm = (props) => {
+  const classes = useStyles();
+
   return (
     <React.Fragment>
-      {console.log("test", options)}{" "}
       <Formik
         initialValues={{ title: "", description: "", price: "" }}
         validationSchema={Yup.object({
           title: Yup.string().required("Required"),
           description: Yup.string().required("Required"),
           price: Yup.number().required("Required"),
+          // category: Yup.string().required("Required"),
         })}
         onSubmit={(values) => {
           props.addItem(values);
         }}
       >
         {(formik) => (
-          <Container component="main" maxWidth="xs">
+          <Container component="main" maxWidth="xs" className={classes.root}>
             <CssBaseline />
             <div>
               <Typography component="h1" variant="h5">
@@ -58,13 +58,6 @@ const ProductForm = (props) => {
                   placeholder="Description."
                   style={{ width: 400 }}
                 />
-                <Select
-                  value={props.selectedOption}
-                  onChange={props.handleChange}
-                  options={options}
-                  getOptionLabel={(option) => option.name}
-                  getOptionValue={(option) => option.name}
-                />
                 <MyTextInput
                   variant="outlined"
                   margin="normal"
@@ -82,6 +75,14 @@ const ProductForm = (props) => {
                   maxFileSize={15242880}
                   withPreview={true}
                 />
+                <Select
+                  value={props.selectedOption}
+                  options={categories}
+                  onChange={props.handleChange}
+                  getOptionLabel={(option) => option.name}
+                  getOptionValue={(option) => option.name}
+                />{" "}
+                <br />
                 <Button
                   type="submit"
                   fullWidth

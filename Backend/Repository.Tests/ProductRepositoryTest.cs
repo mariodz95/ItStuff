@@ -7,6 +7,8 @@ using Model.Common;
 using System;
 using System.Linq;
 using Xunit;
+using System.Drawing;
+using System.IO;
 
 namespace Repository.Tests
 {
@@ -49,7 +51,7 @@ namespace Repository.Tests
         #endregion
 
         [Fact]
-        public async void Create_ShouldReturnNewProduct()
+        public async void CreateAsync_ShouldReturnNewProduct()
         {
             using (var context = new ApplicationDbContext(ContextOptions))
             {
@@ -68,6 +70,22 @@ namespace Repository.Tests
                 var user = context.Set<ProductEntity>().Single(u => u.Name == "Name 4");
 
                 Assert.Equal("Name 4", user.Name);
+            }
+        }
+
+
+        [Fact]
+        public async void GetProductAsync_ShouldReturnProduct()
+        {
+            using (var context = new ApplicationDbContext(ContextOptions))
+            {
+                var productRepository = new ProductRepository(context, mapper);
+
+                var product = await productRepository.GetProductAsync(id);
+
+                Assert.Equal("Name 1", product.Name);
+                Assert.Equal("Descp 1", product.Description);
+                Assert.Equal("1", product.Price);
             }
         }
     }

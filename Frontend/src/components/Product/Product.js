@@ -12,7 +12,11 @@ class Product extends Component {
   }
 
   addItem = (values) => {
-    this.props.createProduct(values, this.state.pictures);
+    this.props.createProduct(
+      values,
+      this.state.pictures,
+      this.state.selectedOption.name
+    );
   };
 
   onDrop(picture) {
@@ -23,7 +27,6 @@ class Product extends Component {
 
   handleChange = (selectedOption) => {
     this.setState({ selectedOption });
-    console.log(`Option selected:`, selectedOption);
   };
 
   render() {
@@ -45,5 +48,5 @@ const mapStateToProps = (state) => ({
   newProduct: state.products.newProduct,
 });
 
-const connectedAuth = connect(mapStateToProps, { createProduct })(Product);
-export { connectedAuth as Product };
+const connectedProduct = connect(mapStateToProps, { createProduct })(Product);
+export { connectedProduct as Product };

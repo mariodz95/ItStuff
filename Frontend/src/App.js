@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { history } from "./helpers/history";
 import { HomePage } from "./components/Home/HomePage";
 import { Product } from "./components/Product/Product";
+import { ProductDetail } from "./components/Product/ProductDetails/ProductDetail";
+import PrivateRoute from "./helpers/PrivateRoute";
 
 function App() {
   return (
@@ -16,7 +18,8 @@ function App() {
           <Route path="/" exact component={HomePage} />
           <Route path="/login" component={Auth} />
           <Route path="/register" component={Auth} />
-          <Route path="/product" component={Product} />
+          <PrivateRoute path="/product" component={Product} />
+          <Route path="/productdetail" component={ProductDetail} />
         </Switch>
       </Router>
     </React.Fragment>

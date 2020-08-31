@@ -9,6 +9,5 @@ namespace Model.Common
         byte[] ImageData { set; get; }
 
         Guid ProductId { get; set; }
-        IProductModel Product { get; set; }
     }
 }

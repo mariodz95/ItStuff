@@ -14,4 +14,11 @@ export const categories = [
   { name: "Keyboard's", img: keyboard },
   { name: "Mouse's", img: mouse },
   { name: "Monitor's", img: monitor },
+  { name: "HDD's", img: monitor },
+  { name: "SSD's", img: monitor },
+  { name: "Graphic Card's", img: monitor },
+  { name: "MotherBoard's", img: monitor },
+  { name: "Software", img: monitor },
+  { name: "CPU's", img: monitor },
+  { name: "Else", img: monitor },
 ];

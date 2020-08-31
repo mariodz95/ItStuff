@@ -12,9 +12,9 @@ namespace Model.Common
         string Price { get; set; }
         string Location { get; set; }
         string PhoneNumber { get; set; }
+        public string Category { get; set; }
         Guid UserId { get; set; }
         IUserModel User { get; set; }
         List<IProductImageModel> Images { get; set; }
-        IProductCategoryModel ProductCategory { get; set; }
     }
 }

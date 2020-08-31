@@ -18,6 +18,5 @@ namespace DAL
         public DbSet<UserRoleEntity> UserRole { get; set; }
         public DbSet<ProductEntity> Product { get; set; }
         public DbSet<ProductImageEntity> ProductImage { get; set; }
-        public DbSet<ProductCategoryEntity> ProductCategory { get; set; }
     }
 }

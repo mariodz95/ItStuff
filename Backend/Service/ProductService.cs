@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Common.Interface_Sort_Pag_Flt;
 using Microsoft.AspNetCore.Http;
 using Model.Common;
 using Repository.Common;
@@ -37,12 +38,24 @@ namespace Service
             return newProduct;
         }
 
+
+        //public async Task<IEnumerable<IProductModel>> GetAllAsync(IPaging paging, IFiltering filtering, ISorting sortObj)
+        //{
+        //    var result = await productRepository.GetAllAsync(paging, filtering, sortObj);
+        //    return mapper.Map<IEnumerable<IProductModel>>(result);
+        //}
+
         public byte[] ConvertToBytes(IFormFile image)
         {
             byte[] CoverImageBytes = null;
             BinaryReader reader = new BinaryReader(image.OpenReadStream());
             CoverImageBytes = reader.ReadBytes((int)image.Length);
             return CoverImageBytes;
+        }
+
+        public async Task<IProductModel> GetProductAsync(Guid productId)
+        {
+            return await productRepository.GetProductAsync(productId); 
         }
     }
 }
