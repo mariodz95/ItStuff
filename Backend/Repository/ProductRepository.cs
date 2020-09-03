@@ -49,33 +49,33 @@ namespace Repository
             return mapper.Map<IProductModel>(product);
         }
 
-        //public async Task<IEnumerable<ProductEntity>> GetAllAsync(IPaging paging, IFiltering filtering, ISorting sortObj)
-        //{
-        //    bool pagingEnabled = paging.PageSize > 0;
-        //    IQueryable<ProductEntity> query = context.Product.Include(pi => pi.Images);
+        public async Task<IEnumerable<ProductEntity>> GetAllAsync(IPaging paging, IFiltering filtering, ISorting sortObj)
+        {
+            bool pagingEnabled = paging.PageSize > 0;
+            IQueryable<ProductEntity> query = context.Product.Include(pi => pi.Images);
 
-        //    if (pagingEnabled)
-        //    {
-        //        paging.TotalPages = (int)Math.Ceiling((decimal)query.Count() / (decimal)paging.PageSize);
-        //    }
-        //    else
-        //    {
-        //        paging.TotalPages = 1;
-        //    }
+            if (pagingEnabled)
+            {
+                paging.TotalPages = (int)Math.Ceiling((decimal)query.Count() / (decimal)paging.PageSize);
+            }
+            else
+            {
+                paging.TotalPages = 1;
+            }
 
-        //    //if (filtering.FilterValue != null)
-        //    //{
-        //    //    query = query.Where(p => p.Name == filtering.FilterValue);
-        //    //}
+            if (filtering.FilterValue != null)
+            {
+                query = query.Where(p => p.Category == filtering.FilterValue);
+            }
 
-        //    if (pagingEnabled)
-        //    {
-        //        return await query.Skip((paging.PageNumber - 1) * paging.PageSize).Take(paging.PageSize).ToListAsync();
-        //    }
-        //    else
-        //    {
-        //        return await query.AsNoTracking().ToListAsync();
-        //    }
-        //}
+            if (pagingEnabled)
+            {
+                return await query.Skip((paging.PageNumber - 1) * paging.PageSize).Take(paging.PageSize).ToListAsync();
+            }
+            else
+            {
+                return await query.AsNoTracking().ToListAsync();
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import { history } from "../helpers/history";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +24,7 @@ export const SimpleCard = (props) => {
       className={classes.root}
       onClick={() => {
         console.log("test", props.name);
+        history.push("/items/" + props.name);
       }}
     >
       <CardContent>

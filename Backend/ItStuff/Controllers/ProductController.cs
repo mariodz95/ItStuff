@@ -59,30 +59,30 @@ namespace ItStuff.Controllers
             return Ok(product);
         }
 
-        //[AllowAnonymous]
-        //[HttpGet("getall/{pageNumber}&{pageSize}/{search?}")]
-        //public async Task<IActionResult> GetAll(int pageNumber = 0, int pageSize = 10, string search = null, string sort = null)
-        //{
-        //    IFiltering filtering = new Filtering
-        //    {
-        //        FilterValue = search
-        //    };
+        [AllowAnonymous]
+        [HttpGet("getall/{pageNumber}&{pageSize}/{search?}")]
+        public async Task<IActionResult> GetAll(int pageNumber = 0, int pageSize = 10, string search = null, string sort = null)
+        {
+            IFiltering filtering = new Filtering
+            {
+                FilterValue = search
+            };
 
-        //    ISorting sorting = new Sorting
-        //    {
-        //        SortOrder = sort
-        //    };
+            ISorting sorting = new Sorting
+            {
+                SortOrder = sort
+            };
 
-        //    IPaging paging = new Paging
-        //    {
-        //        PageNumber = pageNumber,
-        //        PageSize = pageSize,
-        //        TotalPages = 0
-        //    };
+            IPaging paging = new Paging
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalPages = 0
+            };
 
-        //    var products = await productService.GetAllAsync(paging, filtering, sorting);
-        //    var mapProjects = mapper.Map<IEnumerable<ProductViewModel>>(products);
-        //    return Ok(new { products = mapProjects, totalPages = paging.TotalPages });
-        //}
+            var products = await productService.GetAllAsync(paging, filtering, sorting);
+            //var mapProducts = mapper.Map<IEnumerable<ProductViewModel>>(products);
+            return Ok(new { products = products, totalPages = paging.TotalPages });
+        }
     }
 }

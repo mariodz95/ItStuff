@@ -3,10 +3,10 @@ import { productService } from "../../services/productService";
 import { displayError } from "../../store/alertActions";
 import { history } from "../../helpers/history";
 
-export const createProduct = (product, images, category) => (dispatch) => {
-  dispatch(request({ product, images, category }));
+export const createProduct = (product, images) => (dispatch) => {
+  dispatch(request({ product, images }));
 
-  productService.createProduct(product, images, category).then(
+  productService.createProduct(product, images).then(
     (product) => {
       localStorage.setItem("newProduct", JSON.stringify(product));
       dispatch(success(product));
@@ -50,5 +50,32 @@ export const getProduct = (id) => (dispatch) => {
   }
   function failure(error) {
     return { type: productConstant.GET_FAILURE, error };
+  }
+};
+
+export const getAll = (pageCount, pageSize, search) => (dispatch) => {
+  dispatch(request());
+  productService.getAll(pageCount, pageSize, search).then(
+    (data) => {
+      dispatch(success(data.products));
+      dispatch(getPageCount(data.totalPages));
+    },
+    (error) => {
+      dispatch(failure(error));
+      dispatch(displayError(error));
+    }
+  );
+
+  function request() {
+    return { type: productConstant.GET_ALL_REQUEST };
+  }
+  function success(products) {
+    return { type: productConstant.GET_ALL_SUCCESS, products };
+  }
+  function failure(error) {
+    return { type: productConstant.GET_ALL_FAILURE, error };
+  }
+  function getPageCount(totalPages) {
+    return { type: productConstant.GET_TOTAL_PAGES, totalPages };
   }
 };

@@ -8,6 +8,8 @@ import { HomePage } from "./components/Home/HomePage";
 import { Product } from "./components/Product/Product";
 import { ProductDetail } from "./components/Product/ProductDetails/ProductDetail";
 import PrivateRoute from "./helpers/PrivateRoute";
+import { ItemList } from "./components/Product/ListOfItems/ItemList";
+import ItemListPresenter from "./components/Product/ListOfItems/ItemListPresenter";
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
           <Route path="/register" component={Auth} />
           <PrivateRoute path="/product" component={Product} />
           <Route path="/productdetail" component={ProductDetail} />
+          <Route path="/items" component={ItemList} />
         </Switch>
       </Router>
     </React.Fragment>

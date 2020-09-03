@@ -7,14 +7,17 @@ import axios from "axios";
 export const productService = {
   createProduct,
   getProduct,
+  getAll,
 };
 
-function createProduct(product, images, category) {
+function createProduct(product, images) {
+  console.log("service product", product);
+
   let formData = new FormData();
   formData.append("title", JSON.stringify(product.title));
   formData.append("description", JSON.stringify(product.description));
   formData.append("price", JSON.stringify(product.price));
-  formData.append("category", JSON.stringify(category));
+  formData.append("category", JSON.stringify(product.category));
 
   images.forEach((element) => {
     formData.append("body", element);
@@ -41,4 +44,17 @@ function getProduct(productId) {
   return fetch(`${url}product/getproduct/${productId}`, requestOptions).then(
     handleResponse
   );
+}
+
+function getAll(pageNumber, pageSize, search) {
+  console.log("servis");
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  return fetch(
+    `${url}product/getall/${pageNumber}&${pageSize}/${search}`,
+    requestOptions
+  ).then(handleResponse);
 }

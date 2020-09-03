@@ -7,16 +7,13 @@ import { connect } from "react-redux";
 class Product extends Component {
   constructor(props) {
     super(props);
-    this.state = { pictures: [], selectedOption: null };
+    this.state = { pictures: [] };
     this.onDrop = this.onDrop.bind(this);
   }
 
   addItem = (values) => {
-    this.props.createProduct(
-      values,
-      this.state.pictures,
-      this.state.selectedOption.name
-    );
+    console.log("values", values);
+    this.props.createProduct(values, this.state.pictures);
   };
 
   onDrop(picture) {
@@ -24,10 +21,6 @@ class Product extends Component {
       pictures: this.state.pictures.concat(picture),
     });
   }
-
-  handleChange = (selectedOption) => {
-    this.setState({ selectedOption });
-  };
 
   render() {
     return (

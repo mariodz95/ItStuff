@@ -2,7 +2,16 @@ import { productConstant } from "./productConstants";
 
 let newProduct = JSON.parse(localStorage.getItem("newProduct"));
 const initialState = newProduct
-  ? { loading: false, newProduct, product: null, error: {} }
+  ? {
+      loading: false,
+      newProduct,
+      product: null,
+      error: {},
+      productList: [],
+      pageCount: 1,
+      pageSize: 10,
+      totalPages: null,
+    }
   : {};
 
 export default function products(state = initialState, action) {
@@ -30,6 +39,18 @@ export default function products(state = initialState, action) {
     }
     case productConstant.GET_FAILURE: {
       return { ...state, error: action.error };
+    }
+    case productConstant.GET_ALL_REQUEST: {
+      return { ...state, loading: true };
+    }
+    case productConstant.GET_ALL_SUCCESS: {
+      return { ...state, productList: action.products };
+    }
+    case productConstant.GET_ALL_FAILURE: {
+      return { ...state, error: action.error };
+    }
+    case productConstant.GET_TOTAL_PAGES: {
+      return { ...state, totalPages: action.totalPages };
     }
     default:
       return state;

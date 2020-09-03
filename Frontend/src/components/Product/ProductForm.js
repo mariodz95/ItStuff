@@ -24,12 +24,12 @@ const ProductForm = (props) => {
   return (
     <React.Fragment>
       <Formik
-        initialValues={{ title: "", description: "", price: "" }}
+        initialValues={{ title: "", description: "", price: "", category: "" }}
         validationSchema={Yup.object({
           title: Yup.string().required("Required"),
           description: Yup.string().required("Required"),
           price: Yup.number().required("Required"),
-          // category: Yup.string().required("Required"),
+          category: Yup.string().required("Required"),
         })}
         onSubmit={(values) => {
           props.addItem(values);
@@ -76,12 +76,19 @@ const ProductForm = (props) => {
                   withPreview={true}
                 />
                 <Select
+                  name="category"
+                  id="category"
                   value={props.selectedOption}
                   options={categories}
-                  onChange={props.handleChange}
+                  required
+                  onChange={(opt, e) => {
+                    formik.setFieldValue("category", opt.name);
+                    console.log("formik", formik);
+                  }}
                   getOptionLabel={(option) => option.name}
                   getOptionValue={(option) => option.name}
                 />{" "}
+                <div className="error">{formik.errors.category}</div>
                 <br />
                 <Button
                   type="submit"

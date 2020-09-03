@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Common.Interface_Sort_Pag_Flt;
+using Microsoft.AspNetCore.Http;
 using Model.Common;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace Service.Common
     {
         Task<IProductModel> CreateAsync(IProductModel product, IList<IFormFile> formData);
         Task<IProductModel> GetProductAsync(Guid productId);
-        //Task<IEnumerable<IProductModel>> GetAllAsync(IPaging paging, IFiltering filtering, ISorting sortObj);
+        Task<IEnumerable<IProductModel>> GetAllAsync(IPaging paging, IFiltering filtering, ISorting sortObj);
     }
 }

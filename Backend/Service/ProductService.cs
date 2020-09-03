@@ -3,6 +3,7 @@ using Common.Interface_Sort_Pag_Flt;
 using Microsoft.AspNetCore.Http;
 using Model.Common;
 using Repository.Common;
+using Repository.Common.User;
 using Service.Common;
 using System;
 using System.Collections.Generic;
@@ -14,19 +15,24 @@ namespace Service
     public class ProductService : IProductService
     {
         private IProductRepository productRepository;
+        private IUserRepository userRepository;
         private IMapper mapper;
 
-        public ProductService(IProductRepository productRepository, IMapper mapper)
+        public ProductService(IProductRepository productRepository, IMapper mapper, IUserRepository userRepository)
         {
             this.productRepository = productRepository;
             this.mapper = mapper;
+            this.userRepository = userRepository;
         }
         public async Task<IProductModel> CreateAsync(IProductModel product, IList<IFormFile> formData)
         {
+            var user = await userRepository.GetByIdAsync(product.UserId);
+
             product.Id = Guid.NewGuid();
             product.DateCreated = DateTime.Now;
             product.DateUpdated = DateTime.Now;
-
+            product.Location = user.City;
+            
             var newProduct = await productRepository.CreateAsync(product);
 
             foreach (var image in formData)
@@ -39,11 +45,11 @@ namespace Service
         }
 
 
-        //public async Task<IEnumerable<IProductModel>> GetAllAsync(IPaging paging, IFiltering filtering, ISorting sortObj)
-        //{
-        //    var result = await productRepository.GetAllAsync(paging, filtering, sortObj);
-        //    return mapper.Map<IEnumerable<IProductModel>>(result);
-        //}
+        public async Task<IEnumerable<IProductModel>> GetAllAsync(IPaging paging, IFiltering filtering, ISorting sortObj)
+        {
+            var result = await productRepository.GetAllAsync(paging, filtering, sortObj);
+            return mapper.Map<IEnumerable<IProductModel>>(result);
+        }
 
         public byte[] ConvertToBytes(IFormFile image)
         {
