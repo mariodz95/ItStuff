@@ -23,7 +23,6 @@ export const SimpleCard = (props) => {
     <Card
       className={classes.root}
       onClick={() => {
-        console.log("test", props.name);
         history.push("/items/" + props.name);
       }}
     >

@@ -37,6 +37,8 @@ namespace Repository
             image.Id = Guid.NewGuid();
             image.ProductId = id;
             image.ImageData = file;
+            image.DateCreated = DateTime.Now;
+            image.DateUpdated = DateTime.Now;
             await context.ProductImage.AddAsync(image);
             await context.SaveChangesAsync();
             return mapper.Map<IProductImageModel>(image);

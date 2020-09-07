@@ -12,7 +12,6 @@ class Product extends Component {
   }
 
   addItem = (values) => {
-    console.log("values", values);
     this.props.createProduct(values, this.state.pictures);
   };
 

@@ -1,27 +1,54 @@
 import React from "react";
+import back from "./icons/back.png";
+import next from "./icons/next.png";
 
 const ImageGallery = (props) => {
-  console.log("galerija", props);
   return (
-    <div>
-      {" "}
-      <img
-        width={400}
-        height={300}
-        src={`data:image/jpeg;base64,${props.images[0].imageData}`}
-      />
-      <br />
-      {props.images.slice(0, 4).map((item) => {
-        return (
+    console.log("props", props),
+    (
+      <div>
+        {" "}
+        <img
+          width={400}
+          height={300}
+          src={`data:image/jpeg;base64,${props.displayImage.image.imageData}`}
+        />
+        <br />
+        {props.images.map((item) => {
+          return (
+            <img
+              width={75}
+              height={75}
+              onClick={() => console.log("test", item)}
+              src={`data:image/jpeg;base64,${item.imageData}`}
+            />
+          );
+        })}
+        <br />
+        {props.displayBack ? (
           <img
-            width={100}
-            height={100}
-            onClick={() => console.log("test", item)}
-            src={`data:image/jpeg;base64,${item.imageData}`}
+            height="100px"
+            width="100px"
+            src={back}
+            alt="image"
+            onClick={() => {
+              props.controlImage(-1);
+            }}
           />
-        );
-      })}
-    </div>
+        ) : null}
+        {props.displayNext ? (
+          <img
+            height="100px"
+            width="100px"
+            src={next}
+            alt="image"
+            onClick={() => {
+              props.controlImage(+1);
+            }}
+          />
+        ) : null}
+      </div>
+    )
   );
 };
 

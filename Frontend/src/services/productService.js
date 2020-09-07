@@ -11,8 +11,6 @@ export const productService = {
 };
 
 function createProduct(product, images) {
-  console.log("service product", product);
-
   let formData = new FormData();
   formData.append("title", JSON.stringify(product.title));
   formData.append("description", JSON.stringify(product.description));
@@ -36,7 +34,6 @@ function createProduct(product, images) {
 }
 
 function getProduct(productId) {
-  console.log("id u servisu", productId);
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" },
@@ -47,7 +44,6 @@ function getProduct(productId) {
 }
 
 function getAll(pageNumber, pageSize, search) {
-  console.log("servis");
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" },

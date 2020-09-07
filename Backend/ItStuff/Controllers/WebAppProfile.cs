@@ -15,6 +15,8 @@ namespace ItStuff.Controllers
             CreateMap<UserRoleViewModel, IUserRoleModel>().ReverseMap();
 
             CreateMap<ProductViewModel, IProductModel>().ReverseMap();
+            CreateMap<ProductImageViewModel, IProductImageModel>().ReverseMap();
+
         }
     }
 }

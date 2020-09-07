@@ -56,7 +56,7 @@ const ProductForm = (props) => {
                   name="description"
                   rows="6"
                   placeholder="Description."
-                  style={{ width: 400 }}
+                  style={{ minWidth: 400 }}
                 />
                 <MyTextInput
                   variant="outlined"
@@ -83,7 +83,6 @@ const ProductForm = (props) => {
                   required
                   onChange={(opt, e) => {
                     formik.setFieldValue("category", opt.name);
-                    console.log("formik", formik);
                   }}
                   getOptionLabel={(option) => option.name}
                   getOptionValue={(option) => option.name}

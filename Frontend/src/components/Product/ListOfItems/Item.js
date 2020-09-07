@@ -1,9 +1,9 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,18 +25,19 @@ const Item = (props) => {
   return (
     <div>
       <Container maxWidth="sm">
-        <Card
-          className={classes.root}
-          onClick={() => {
-            console.log("props. kartica", props.product.name);
-          }}
-        >
+        <Card className={classes.root}>
           <div className={classes.details}>
             <CardContent className={classes.content}>
-              <Typography gutterBottom>{props.product.name}</Typography>
-              <p>{props.product.name}</p>
+              <Link
+                to={{
+                  pathname: "/productdetail",
+                  state: { product: props.product },
+                }}
+              >
+                {" "}
+                {props.product.name}
+              </Link>
               <br />
-              <p>{props.product.description}</p>
             </CardContent>
           </div>
           {props.product.images[0] !== undefined ? (

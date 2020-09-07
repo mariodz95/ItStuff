@@ -15,7 +15,8 @@ namespace Model
         public string PhoneNumber { get; set; }
         public string Category { get; set; }
         public Guid UserId { get; set; }
+        public IProductImageModel Image { get; set; }
         public IUserModel User { get; set; }
-        public List<IProductImageModel> Images { get; set; }
+        public IList<IProductImageModel> Images { get; set; }
     }
 }

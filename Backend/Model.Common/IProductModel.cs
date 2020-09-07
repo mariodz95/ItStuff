@@ -7,14 +7,15 @@ namespace Model.Common
 {
     public interface IProductModel : IBaseModel
     {
-        string Name { get; set; }
-        string Description { get; set; }
-        string Price { get; set; }
-        string Location { get; set; }
-        string PhoneNumber { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Price { get; set; }
+        public string Location { get; set; }
+        public string PhoneNumber { get; set; }
         public string Category { get; set; }
-        Guid UserId { get; set; }
-        IUserModel User { get; set; }
-        List<IProductImageModel> Images { get; set; }
+        public Guid UserId { get; set; }
+        public IUserModel User { get; set; }
+        public IProductImageModel Image { get; set; }
+        public IList<IProductImageModel> Images { get; set; }
     }
 }

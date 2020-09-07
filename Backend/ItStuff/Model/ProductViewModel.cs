@@ -12,5 +12,7 @@ namespace ItStuff.Model
         public string Price { get; set; }
         public string Location { get; set; }
         public int PhoneNumber { get; set; }
+        public ProductImageViewModel Image { get; set; }
+        public List<ProductImageViewModel> Images { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Common.Interface_Sort_Pag_Flt;
 using Microsoft.AspNetCore.Http;
+using Model;
 using Model.Common;
 using Repository.Common;
 using Repository.Common.User;
@@ -38,8 +39,11 @@ namespace Service
             foreach (var image in formData)
             {
                 byte[] file = ConvertToBytes(image);
-                await productRepository.AddImagesAsync(file, product.Id);
+
+                var newImage = await productRepository.AddImagesAsync(file, product.Id);
+                newProduct.Image = newImage;
             }
+
 
             return newProduct;
         }

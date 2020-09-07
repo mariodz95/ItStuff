@@ -22,12 +22,9 @@ ItemList.propTypes = {
   getAll: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => (
-  console.log("statara", state),
-  {
-    productList: state.products.productList,
-  }
-);
+const mapStateToProps = (state) => ({
+  productList: state.products.productList,
+});
 
 const connectedItemListDetail = connect(mapStateToProps, { getAll })(ItemList);
 export { connectedItemListDetail as ItemList };
