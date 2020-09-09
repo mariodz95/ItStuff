@@ -26,7 +26,8 @@ namespace DAL.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -35,19 +36,24 @@ namespace DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -56,7 +62,9 @@ namespace DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Product");
+                    b.HasIndex("Name", "Price", "Location", "Category");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("DAL.Entities.ProductImageEntity", b =>
@@ -72,10 +80,8 @@ namespace DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<byte[]>("ImageData")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
@@ -84,7 +90,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImage");
+                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("DAL.Entities.UserEntity", b =>
@@ -94,15 +100,18 @@ namespace DAL.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateCreated")
@@ -112,30 +121,42 @@ namespace DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Token")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Zip")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -166,7 +187,7 @@ namespace DAL.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("UserRole");
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("DAL.Entities.ProductEntity", b =>

@@ -24,7 +24,7 @@ namespace Repository.User
         public async Task<IUserModel> GetUserAsync(string email)
         {
             var user = await context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email == email);
-            user.UserRole = await context.UserRole.AsNoTracking().FirstOrDefaultAsync(u => u.UserId == user.Id);
+            user.UserRole = await context.UserRoles.AsNoTracking().FirstOrDefaultAsync(u => u.UserId == user.Id);
             return mapper.Map<IUserModel>(user);
         }
 

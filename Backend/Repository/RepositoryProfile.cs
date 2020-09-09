@@ -13,7 +13,6 @@ namespace Repository
             CreateMap<UserRoleEntity, IUserRoleModel>().ReverseMap();
             CreateMap<ProductEntity, IProductModel>().ReverseMap();
             CreateMap<ProductImageEntity, IProductImageModel>().ReverseMap();
-            CreateMap<ProductCategoryEntity, IProductCategoryModel>().ReverseMap();
         }
     }
 }

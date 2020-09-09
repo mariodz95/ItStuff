@@ -26,7 +26,7 @@ namespace Repository
         public async Task<IProductModel> CreateAsync(IProductModel product)
         {
             var newProduct = mapper.Map<ProductEntity>(product);
-            await context.Product.AddAsync(newProduct);
+            await context.Products.AddAsync(newProduct);
             await context.SaveChangesAsync();
             return product;
         }
@@ -39,14 +39,14 @@ namespace Repository
             image.ImageData = file;
             image.DateCreated = DateTime.Now;
             image.DateUpdated = DateTime.Now;
-            await context.ProductImage.AddAsync(image);
+            await context.ProductImages.AddAsync(image);
             await context.SaveChangesAsync();
             return mapper.Map<IProductImageModel>(image);
         }
 
         public async Task<IProductModel> GetProductAsync(Guid productId)
         {
-            var product = await context.Product.Include(product => product.Images).FirstOrDefaultAsync(p => p.Id == productId);
+            var product = await context.Products.Include(product => product.Images).FirstOrDefaultAsync(p => p.Id == productId);
      
             return mapper.Map<IProductModel>(product);
         }
@@ -54,7 +54,7 @@ namespace Repository
         public async Task<IEnumerable<ProductEntity>> GetAllAsync(IPaging paging, IFiltering filtering, ISorting sortObj)
         {
             bool pagingEnabled = paging.PageSize > 0;
-            IQueryable<ProductEntity> query = context.Product.Include(pi => pi.Images);
+            IQueryable<ProductEntity> query = context.Products.Include(pi => pi.Images);
 
             if (pagingEnabled)
             {

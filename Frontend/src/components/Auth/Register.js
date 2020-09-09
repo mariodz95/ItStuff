@@ -51,6 +51,7 @@ export const Register = (props) => {
         city: "",
         zip: "",
         birthDate: "",
+        phoneNumber: "",
       }}
       validationSchema={Yup.object({
         firstName: Yup.string().required("Required"),
@@ -62,6 +63,7 @@ export const Register = (props) => {
         country: Yup.string().required("Required"),
         city: Yup.string().required("Required"),
         zip: Yup.string().required("Required"),
+        phoneNumber: Yup.number().required("Required"),
         birthDate: Yup.date()
           .default(function () {
             return new Date();
@@ -210,7 +212,7 @@ export const Register = (props) => {
                       autoComplete="zip"
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={6}>
                     <MyTextInput
                       required
                       variant="outlined"
@@ -220,6 +222,17 @@ export const Register = (props) => {
                       InputLabelProps={{
                         shrink: true,
                       }}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <MyTextInput
+                      variant="outlined"
+                      required
+                      fullWidth
+                      name="phoneNumber"
+                      labeltxt="Phone Number"
+                      type="phoneNumber"
+                      id="phoneNumber"
                     />
                   </Grid>
                   <Grid item xs={12}>

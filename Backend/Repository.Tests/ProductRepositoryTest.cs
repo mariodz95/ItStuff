@@ -41,9 +41,9 @@ namespace Repository.Tests
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
-                context.Product.Add(new ProductEntity { Id = id, Name = "Name 1", Description = "Descp 1", Price = "1", Location = "Loc 1", PhoneNumber = "Phone 1", UserId = userId });
-                context.Product.Add(new ProductEntity { Id = Guid.NewGuid(), Name = "Name 2", Description = "Descp 2", Price = "1", Location = "Loc 2", PhoneNumber = "Phone 2", UserId = userId });
-                context.Product.Add(new ProductEntity { Id = Guid.NewGuid(), Name = "Name 3", Description = "Descp 3", Price = "1", Location = "Loc 3", PhoneNumber = "Phone 3", UserId = userId });
+                context.Products.Add(new ProductEntity { Id = id, Name = "Name 1", Description = "Descp 1", Price = "1", Location = "Loc 1", PhoneNumber = "Phone 1", UserId = userId });
+                context.Products.Add(new ProductEntity { Id = Guid.NewGuid(), Name = "Name 2", Description = "Descp 2", Price = "1", Location = "Loc 2", PhoneNumber = "Phone 2", UserId = userId });
+                context.Products.Add(new ProductEntity { Id = Guid.NewGuid(), Name = "Name 3", Description = "Descp 3", Price = "1", Location = "Loc 3", PhoneNumber = "Phone 3", UserId = userId });
 
                 context.SaveChanges();
             }

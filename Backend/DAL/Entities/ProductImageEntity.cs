@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace DAL.Entities
 {
     public class ProductImageEntity : BaseEntity
     {
-        public string Name{ get; set; }
+        [Required]
         public byte[] ImageData { set; get; }
 
         public Guid ProductId { get; set; }

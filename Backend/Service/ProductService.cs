@@ -33,6 +33,7 @@ namespace Service
             product.DateCreated = DateTime.Now;
             product.DateUpdated = DateTime.Now;
             product.Location = user.City;
+            product.PhoneNumber = user.PhoneNumber;
             
             var newProduct = await productRepository.CreateAsync(product);
 

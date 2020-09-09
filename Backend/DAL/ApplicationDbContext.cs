@@ -14,9 +14,15 @@ namespace DAL
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProductEntity>()
+                .HasIndex(p => new { p.Name, p.Price, p.Location, p.Category});
+        }
+
         public DbSet<UserEntity> Users { get; set; }
-        public DbSet<UserRoleEntity> UserRole { get; set; }
-        public DbSet<ProductEntity> Product { get; set; }
-        public DbSet<ProductImageEntity> ProductImage { get; set; }
+        public DbSet<UserRoleEntity> UserRoles { get; set; }
+        public DbSet<ProductEntity> Products { get; set; }
+        public DbSet<ProductImageEntity> ProductImages { get; set; }
     }
 }

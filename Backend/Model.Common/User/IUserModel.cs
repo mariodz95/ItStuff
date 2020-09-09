@@ -17,6 +17,7 @@ namespace Model.Common.User
         string Country { get; set; }
         string Zip { get; set; }
         string Gender { get; set; }
+        string PhoneNumber { get; set; }
         DateTime BirthDate { get; set; }
         string Token { get; set; }
         string Password { get; set; }
