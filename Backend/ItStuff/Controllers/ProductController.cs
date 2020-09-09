@@ -81,7 +81,6 @@ namespace ItStuff.Controllers
             };
 
             var products = await productService.GetAllAsync(paging, filtering, sorting);
-            //var mapProducts = mapper.Map<IEnumerable<ProductViewModel>>(products);
             return Ok(new { products = products, totalPages = paging.TotalPages });
         }
     }

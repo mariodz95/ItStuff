@@ -10,7 +10,7 @@ const initialState = newProduct
       productList: [],
       pageCount: 1,
       pageSize: 10,
-      totalPages: null,
+      totalPages: 1,
     }
   : {};
 

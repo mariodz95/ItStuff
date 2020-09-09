@@ -5,12 +5,13 @@ import next from "./icons/next.png";
 const ImageGallery = (props) => {
   return (
     <div>
-      {" "}
-      <img
-        width={400}
-        height={300}
-        src={`data:image/jpeg;base64,${props.displayImage.image.imageData}`}
-      />
+      {props.displayImage.image !== null ? (
+        <img
+          width={400}
+          height={300}
+          src={`data:image/jpeg;base64,${props.displayImage.image.imageData}`}
+        />
+      ) : null}
       <br />
       {props.images.map((item) => {
         return (

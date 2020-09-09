@@ -72,7 +72,7 @@ namespace Repository
 
             if (pagingEnabled)
             {
-                return await query.Skip((paging.PageNumber - 1) * paging.PageSize).Take(paging.PageSize).ToListAsync();
+                return await query.AsNoTracking().Skip((paging.PageNumber - 1) * paging.PageSize).Take(paging.PageSize).OrderByDescending(x => x.DateCreated).ToListAsync();
             }
             else
             {
