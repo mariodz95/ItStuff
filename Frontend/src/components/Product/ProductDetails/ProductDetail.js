@@ -15,14 +15,14 @@ class ProductDetail extends Component {
         ? this.props.location.state.product.images[index]
         : props.newProduct.image;
     let length =
-      this.props.location.satate !== undefined
+      this.props.location.state !== undefined
         ? this.props.location.state.product.images.length
         : null;
     this.state = {
       displayImage: { image },
       imagesLength: length,
       displayBack: false,
-      displayNext: length !== null ? true : false,
+      displayNext: length !== null && length !== 1 ? true : false,
     };
   }
 

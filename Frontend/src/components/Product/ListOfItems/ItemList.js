@@ -3,15 +3,21 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getAll } from "../productActions";
 import ItemListPresenter from "../ListOfItems/ItemListPresenter";
+import "./Items.scss";
 
 class ItemList extends Component {
+  constructor(props) {
+    super(props);
+  }
   componentDidMount() {
-    this.props.getAll(1, 10, "PC's");
+    let category = this.props.location.pathname;
+    category = category.split("/").pop();
+    this.props.getAll(1, 10, category);
   }
 
   render() {
     return (
-      <div>
+      <div className="items">
         <ItemListPresenter productList={this.props.productList} />
       </div>
     );
