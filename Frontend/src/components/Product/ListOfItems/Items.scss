@@ -1,3 +1,15 @@
 .items {
   margin-top: 25px;
 }
+
+.form {
+  margin: 5px;
+}
+.no-items {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}

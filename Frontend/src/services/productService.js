@@ -1,7 +1,5 @@
-import { authHeader } from "../helpers/authHeader";
 import { handleResponse } from "./handleResponse";
 import { url } from "./url";
-import { categories } from "../shared/Categories";
 import axios from "axios";
 
 export const productService = {
@@ -43,14 +41,14 @@ function getProduct(productId) {
   );
 }
 
-function getAll(pageNumber, pageSize, search) {
+function getAll(pageNumber, pageSize, search, fromPrice, toPrice) {
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   };
 
   return fetch(
-    `${url}product/getall/${pageNumber}&${pageSize}/${search}`,
+    `${url}product/getall/${pageNumber}&${pageSize}/${search}/${fromPrice}/${toPrice}`,
     requestOptions
   ).then(handleResponse);
 }

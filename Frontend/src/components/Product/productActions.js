@@ -53,9 +53,11 @@ export const getProduct = (id) => (dispatch) => {
   }
 };
 
-export const getAll = (pageCount, pageSize, search) => (dispatch) => {
+export const getAll = (pageCount, pageSize, search, fromPrice, toPrice) => (
+  dispatch
+) => {
   dispatch(request());
-  productService.getAll(pageCount, pageSize, search).then(
+  productService.getAll(pageCount, pageSize, search, fromPrice, toPrice).then(
     (data) => {
       dispatch(success(data.products));
       dispatch(getPageCount(data.totalPages));

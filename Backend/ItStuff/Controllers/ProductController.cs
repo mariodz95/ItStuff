@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
-using Nancy.Json;
 using Service.Common;
 using System;
 using System.Collections.Generic;
@@ -60,12 +59,12 @@ namespace ItStuff.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("getall/{pageNumber}&{pageSize}/{search?}")]
-        public async Task<IActionResult> GetAll(int pageNumber = 0, int pageSize = 10, string search = null, string sort = null)
-        {
+        [HttpGet("getall/{pageNumber}&{pageSize}/{search?}/{fromPrice?}/{toPrice?}")]
+        public async Task<IActionResult> GetAll(int pageNumber = 0, int pageSize = 10, string search = null, float fromPrice = 0, float toPrice = 0, string sort = null )
+       {
             IFiltering filtering = new Filtering
             {
-                FilterValue = search
+                FilterValue = search,
             };
 
             ISorting sorting = new Sorting
@@ -80,8 +79,11 @@ namespace ItStuff.Controllers
                 TotalPages = 0
             };
 
-            var products = await productService.GetAllAsync(paging, filtering, sorting);
-            return Ok(new { products = products, totalPages = paging.TotalPages });
+            var products = await productService.GetAllAsync(paging, filtering, sorting, fromPrice, toPrice);
+
+            var mappedproducts = mapper.Map<IEnumerable<ProductViewModel>>(products);
+    
+            return Ok(new { products = mappedproducts, totalPages = paging.TotalPages }); ;
         }
     }
 }

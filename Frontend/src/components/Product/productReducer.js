@@ -44,7 +44,7 @@ export default function products(state = initialState, action) {
       return { ...state, loading: true };
     }
     case productConstant.GET_ALL_SUCCESS: {
-      return { ...state, productList: action.products };
+      return { ...state, loading: false, productList: action.products };
     }
     case productConstant.GET_ALL_FAILURE: {
       return { ...state, error: action.error };

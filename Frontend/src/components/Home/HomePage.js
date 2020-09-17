@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { SimpleCard } from "../../shared/SimpleCard";
 import { categories } from "../../shared/Categories";
 import { Grid } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
+import SearchBar from "material-ui-search-bar";
+import { history } from "../../helpers/history";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,10 +16,23 @@ const useStyles = makeStyles((theme) => ({
 
 export const HomePage = () => {
   const classes = useStyles();
+  const [value, setValue] = useState();
+
+  const fetchData = () => {
+    {
+      history.push({ pathname: "/items/", state: { search: value } });
+    }
+  };
 
   return (
     <div className={classes.root}>
       <h1>Categories</h1>
+      <SearchBar
+        value={value}
+        onChange={(newValue) => setValue(newValue)}
+        onRequestSearch={() => fetchData()}
+      />
+      <br />
       <Grid
         container
         spacing={2}

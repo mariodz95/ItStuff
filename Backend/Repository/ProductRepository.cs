@@ -47,14 +47,39 @@ namespace Repository
         public async Task<IProductModel> GetProductAsync(Guid productId)
         {
             var product = await context.Products.Include(product => product.Images).FirstOrDefaultAsync(p => p.Id == productId);
-     
+
             return mapper.Map<IProductModel>(product);
         }
 
-        public async Task<IEnumerable<ProductEntity>> GetAllAsync(IPaging paging, IFiltering filtering, ISorting sortObj)
+        public async Task<IEnumerable<ProductEntity>> GetAllAsync(IPaging paging, IFiltering filtering, ISorting sortObj, float fromPrice, float toPrice)
         {
             bool pagingEnabled = paging.PageSize > 0;
-            IQueryable<ProductEntity> query = context.Products.Include(pi => pi.Images);
+            IQueryable<ProductEntity> query = context.Products.Include(pi => pi.Images).Include(u => u.User);
+
+            if (filtering.FilterValue != null)
+            {
+                if (filtering.FilterValue.Contains("name: "))
+                {
+                    var searchValue = filtering.FilterValue.Remove(0, filtering.FilterValue.IndexOf(' ') + 1);
+                    query = query.Where(p => p.Name.Contains(searchValue));
+                }
+                else
+                {
+                    query = query.Where(p => p.Category == filtering.FilterValue);
+                }
+            }
+
+            if(fromPrice != 0)
+            {
+                query = query.Where(p => p.Price >= fromPrice);
+            }
+
+            if (toPrice != 0)
+            {
+                query = query.Where(p => p.Price <= toPrice);
+            }
+
+
 
             if (pagingEnabled)
             {
@@ -63,11 +88,6 @@ namespace Repository
             else
             {
                 paging.TotalPages = 1;
-            }
-
-            if (filtering.FilterValue != null)
-            {
-                query = query.Where(p => p.Category == filtering.FilterValue);
             }
 
             if (pagingEnabled)

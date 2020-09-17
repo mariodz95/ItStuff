@@ -50,9 +50,9 @@ namespace Service
         }
 
 
-        public async Task<IEnumerable<IProductModel>> GetAllAsync(IPaging paging, IFiltering filtering, ISorting sortObj)
+        public async Task<IEnumerable<IProductModel>> GetAllAsync(IPaging paging, IFiltering filtering, ISorting sortObj, float fromPrice, float toPrice)
         {
-            var result = await productRepository.GetAllAsync(paging, filtering, sortObj);
+            var result = await productRepository.GetAllAsync(paging, filtering, sortObj, fromPrice, toPrice);
             return mapper.Map<IEnumerable<IProductModel>>(result);
         }
 

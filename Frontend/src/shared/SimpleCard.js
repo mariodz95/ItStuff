@@ -23,12 +23,12 @@ export const SimpleCard = (props) => {
     <Card
       className={classes.root}
       onClick={() => {
-        history.push("/items/" + props.name);
+        history.push({ pathname: "/items/", state: { category: props.name } });
       }}
     >
       <CardContent>
         <Typography gutterBottom>{props.name}</Typography>
-        <img height="100px" width="100px" src={props.image} alt="image" />
+        <img height="100px" width="100px" src={props.image} alt="icon" />
       </CardContent>
     </Card>
   );

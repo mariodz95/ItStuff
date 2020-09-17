@@ -9,11 +9,13 @@ import Grid from "@material-ui/core/Grid";
 import { history } from "../../helpers/history";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
   menuButton: {
     marginRight: theme.spacing(2),
+  },
+  menuButtonProfile: {
+    marginRight: theme.spacing(2),
+    flexGrow: 1,
+    marginLeft: 25,
   },
 }));
 
@@ -31,7 +33,7 @@ export const NavigationBar = (props) => {
     <div className={classes.root}>
       <AppBar style={{ background: "#2E3B55" }} position="static">
         <Toolbar>
-          <Grid justify="space-between" container>
+          <Grid container>
             <Typography
               variant="h6"
               style={noPointer}
@@ -42,15 +44,26 @@ export const NavigationBar = (props) => {
               ItStuff
             </Typography>
             {user !== null ? (
-              <Link style={linkStyle} to="/product">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.menuButton}
-                >
-                  Sell Item
-                </Button>
-              </Link>
+              <React.Fragment>
+                <Link style={linkStyle} to="/myprofile">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.menuButtonProfile}
+                  >
+                    MyProfile
+                  </Button>
+                </Link>
+                <Link style={linkStyle} to="/product">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.menuButton}
+                  >
+                    Sell Item
+                  </Button>
+                </Link>
+              </React.Fragment>
             ) : null}
           </Grid>
           {user === null ? (

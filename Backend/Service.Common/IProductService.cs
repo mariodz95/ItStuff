@@ -11,6 +11,6 @@ namespace Service.Common
     {
         Task<IProductModel> CreateAsync(IProductModel product, IList<IFormFile> formData);
         Task<IProductModel> GetProductAsync(Guid productId);
-        Task<IEnumerable<IProductModel>> GetAllAsync(IPaging paging, IFiltering filtering, ISorting sortObj);
+        Task<IEnumerable<IProductModel>> GetAllAsync(IPaging paging, IFiltering filtering, ISorting sortObj, float fromPrice, float toPrice);
     }
 }

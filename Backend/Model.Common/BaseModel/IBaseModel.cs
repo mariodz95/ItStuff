@@ -5,7 +5,7 @@ namespace Model.Common.BaseModel
     public interface IBaseModel
     {
         Guid Id { get; set; }
-        DateTime DateCreated { get; set; }
-        DateTime DateUpdated { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateUpdated { get; set; }
     }
 }

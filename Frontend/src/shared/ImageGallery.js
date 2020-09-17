@@ -9,6 +9,7 @@ const ImageGallery = (props) => {
         <img
           width={400}
           height={300}
+          alt="icon"
           src={`data:image/jpeg;base64,${props.displayImage.image.imageData}`}
         />
       ) : null}
@@ -18,6 +19,7 @@ const ImageGallery = (props) => {
           <img
             width={75}
             height={75}
+            alt="data"
             src={`data:image/jpeg;base64,${item.imageData}`}
           />
         );
@@ -28,7 +30,7 @@ const ImageGallery = (props) => {
           height="100px"
           width="100px"
           src={back}
-          alt="image"
+          alt="prevButton"
           onClick={() => {
             props.controlImage(-1);
           }}
@@ -39,7 +41,7 @@ const ImageGallery = (props) => {
           height="100px"
           width="100px"
           src={next}
-          alt="image"
+          alt="nextButton"
           onClick={() => {
             props.controlImage(+1);
           }}

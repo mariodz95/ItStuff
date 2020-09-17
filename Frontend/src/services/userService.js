@@ -1,4 +1,3 @@
-import { authHeader } from "../helpers/authHeader";
 import { handleResponse } from "./handleResponse";
 import { url } from "./url";
 
