@@ -81,3 +81,33 @@ export const getAll = (pageCount, pageSize, search, fromPrice, toPrice) => (
     return { type: productConstant.GET_TOTAL_PAGES, totalPages };
   }
 };
+
+export const getUserProducts = (userId, pageCount, pageSize) => (dispatch) => {
+  dispatch(request());
+  productService.getUserProducts(userId, pageCount, pageSize).then(
+    (data) => {
+      dispatch(success(data.userProducts));
+      dispatch(getPageCount(data.totalPages));
+    },
+    (error) => {
+      dispatch(failure(error));
+      dispatch(displayError(error));
+    }
+  );
+
+  function request() {
+    return { type: productConstant.GET_ALL_USER_PRODUCTS_REQUEST };
+  }
+  function success(userProducts) {
+    return {
+      type: productConstant.GET_ALL_USER_PRODUCTS_SUCCESS,
+      userProducts,
+    };
+  }
+  function failure(error) {
+    return { type: productConstant.GET_ALL_USER_PRODUCTS_FAILURE, error };
+  }
+  function getPageCount(totalPages) {
+    return { type: productConstant.GET_TOTAL_PAGES, totalPages };
+  }
+};

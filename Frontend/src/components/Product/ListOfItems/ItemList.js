@@ -4,16 +4,9 @@ import PropTypes from "prop-types";
 import { getAll } from "../productActions";
 import ItemListPresenter from "../ListOfItems/ItemListPresenter";
 import "./Items.scss";
-import { css } from "@emotion/core";
 import ClipLoader from "react-spinners/ClipLoader";
 import FilterPresenter from "../Filters/FilterPresenter";
-
-// Can be a string as well. Need to ensure each key-value pair ends with ;
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: blue;
-`;
+import { override } from "../../../shared/spinner";
 
 class ItemList extends Component {
   constructor(props) {
@@ -22,8 +15,8 @@ class ItemList extends Component {
       page: null,
       category: null,
       search: null,
-      fromPrice: null,
-      toPrice: null,
+      fromPrice: 0,
+      toPrice: 0,
     };
   }
   componentDidMount() {
@@ -86,12 +79,14 @@ class ItemList extends Component {
           </div>
         ) : (
           <React.Fragment>
-            <FilterPresenter
-              handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
-              fromPrice={this.state.fromPrice}
-              toPrice={this.state.toPrice}
-            />
+            {this.props.productList.length > 0 ? (
+              <FilterPresenter
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmit}
+                fromPrice={this.state.fromPrice}
+                toPrice={this.state.toPrice}
+              />
+            ) : null}
             <ItemListPresenter
               productList={this.props.productList}
               totalPages={this.props.totalPages}

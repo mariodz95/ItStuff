@@ -9,6 +9,7 @@ import { history } from "../../helpers/history";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    marginTop: 50,
     padding: theme.spacing(2),
     textAlign: "center",
   },
@@ -26,7 +27,6 @@ export const HomePage = () => {
 
   return (
     <div className={classes.root}>
-      <h1>Categories</h1>
       <SearchBar
         value={value}
         onChange={(newValue) => setValue(newValue)}

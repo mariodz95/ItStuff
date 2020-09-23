@@ -68,5 +68,11 @@ namespace Service
         {
             return await productRepository.GetProductAsync(productId); 
         }
+
+        public async Task<IEnumerable<IProductModel>> GetUserProductsAsync(Guid userId, IPaging paging)
+        {
+            var result = await productRepository.GetProductsByUser(userId, paging);
+            return mapper.Map<IEnumerable<IProductModel>>(result);
+        }
     }
 }

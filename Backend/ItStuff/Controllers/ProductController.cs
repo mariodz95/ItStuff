@@ -49,6 +49,22 @@ namespace ItStuff.Controllers
             return Ok(mapper.Map<ProductViewModel>(newProduct));
         }
 
+        [Authorize(Roles = "User,Admin")]
+        [HttpGet("getuserproducts/{userId}&{pageNumber}&{pageSize}")]
+        public async Task<IActionResult> GetUserProducts(Guid userId, int pageNumber = 0, int pageSize = 10)
+        {
+            IPaging paging = new Paging
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalPages = 0
+            };
+
+            var products = await productService.GetUserProductsAsync(userId, paging);
+
+            return Ok(new { userProducts = products, totalPages = paging.TotalPages });
+        }
+
         [AllowAnonymous]
         [HttpGet("getproduct/{productId}")]
         public async Task<IActionResult> GetProduct(Guid productId)

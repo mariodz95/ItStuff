@@ -6,6 +6,7 @@ export const productService = {
   createProduct,
   getProduct,
   getAll,
+  getUserProducts,
 };
 
 function createProduct(product, images) {
@@ -49,6 +50,23 @@ function getAll(pageNumber, pageSize, search, fromPrice, toPrice) {
 
   return fetch(
     `${url}product/getall/${pageNumber}&${pageSize}/${search}/${fromPrice}/${toPrice}`,
+    requestOptions
+  ).then(handleResponse);
+}
+
+function getUserProducts(userId, pageNumber, pageSize) {
+  let user = JSON.parse(localStorage.getItem("user"));
+
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + user.token,
+    },
+  };
+
+  return fetch(
+    `${url}product/getuserproducts/${userId}&${pageNumber}&${pageSize}`,
     requestOptions
   ).then(handleResponse);
 }

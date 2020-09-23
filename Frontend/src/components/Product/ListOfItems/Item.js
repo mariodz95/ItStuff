@@ -6,6 +6,7 @@ import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import Moment from "moment";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,19 +53,39 @@ const Item = (props) => {
                 </Link>
               </Typography>
               <br />
-              <p>Price: {props.product.price}</p>
+              <span>Price: {props.product.price}</span>
               <Typography
                 className={classes.body}
                 variant="body2"
                 component="p"
               >
-                <p>Location: {props.product.location}</p>
-                <p>
+                <span>Location: {props.product.location}</span>
+                <span>
                   Uploaded:{" "}
                   {Moment(props.product.dateCreated).format("DD/MM/YYYY")}
-                </p>
+                </span>
               </Typography>
               <br />
+              {props.profileSection ? (
+                <React.Fragment>
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    color="primary"
+                    className={classes.margin}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    color="primary"
+                    className={classes.margin}
+                  >
+                    Delete
+                  </Button>
+                </React.Fragment>
+              ) : null}
             </CardContent>
           </div>
           {props.product.images[0] !== undefined ? (

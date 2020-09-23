@@ -1,9 +1,15 @@
 import React from "react";
+import ItemListPresenter from "../Product/ListOfItems/ItemListPresenter";
 
 const ProfileSectionPresenter = (props) => {
   return (
     <div>
-      <p>Profile section</p>
+      <ItemListPresenter
+        productList={props.productList}
+        totalPages={props.totalPages}
+        handlePagination={props.handlePagination}
+        profileSection={true}
+      />
     </div>
   );
 };

@@ -20,7 +20,9 @@ const ItemListPresenter = (props) => {
       {props.productList.length > 0 ? (
         <React.Fragment>
           {props.productList.map((item) => {
-            return <Item product={item} />;
+            return (
+              <Item product={item} profileSection={props.profileSection} />
+            );
           })}
           <Grid
             container

@@ -9,7 +9,7 @@ import { Product } from "./components/Product/Product";
 import { ProductDetail } from "./components/Product/ProductDetails/ProductDetail";
 import PrivateRoute from "./helpers/PrivateRoute";
 import { ItemList } from "./components/Product/ListOfItems/ItemList";
-import ProfileSection from "./components/ProfileSection/ProfileSection";
+import { ProfileSection } from "./components/ProfileSection/ProfileSection";
 
 function App() {
   return (

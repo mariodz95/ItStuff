@@ -8,6 +8,7 @@ const initialState = newProduct
       product: null,
       error: {},
       productList: [],
+      userProductList: [],
       pageCount: 1,
       pageSize: 10,
       totalPages: 1,
@@ -51,6 +52,15 @@ export default function products(state = initialState, action) {
     }
     case productConstant.GET_TOTAL_PAGES: {
       return { ...state, totalPages: action.totalPages };
+    }
+    case productConstant.GET_ALL_USER_PRODUCTS_REQUEST: {
+      return { ...state, loading: true };
+    }
+    case productConstant.GET_ALL_USER_PRODUCTS_SUCCESS: {
+      return { ...state, loading: false, userProductList: action.userProducts };
+    }
+    case productConstant.GET_ALL_USER_PRODUCTS_FAILURE: {
+      return { ...state, error: action.error };
     }
     default:
       return state;

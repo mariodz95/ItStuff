@@ -79,7 +79,30 @@ namespace Repository
                 query = query.Where(p => p.Price <= toPrice);
             }
 
+            if (pagingEnabled)
+            {
+                paging.TotalPages = (int)Math.Ceiling((decimal)query.Count() / (decimal)paging.PageSize);
+            }
+            else
+            {
+                paging.TotalPages = 1;
+            }
 
+            if (pagingEnabled)
+            {
+                return await query.AsNoTracking().Skip((paging.PageNumber - 1) * paging.PageSize).Take(paging.PageSize).OrderByDescending(x => x.DateCreated).ToListAsync();
+            }
+            else
+            {
+                return await query.AsNoTracking().ToListAsync();
+            }
+        }
+
+        public async Task<IEnumerable<ProductEntity>> GetProductsByUser(Guid userId, IPaging paging)
+        {
+            bool pagingEnabled = paging.PageSize > 0;
+
+            IQueryable<ProductEntity> query = context.Products.Include(pi => pi.Images).Where(p => p.UserId == userId);
 
             if (pagingEnabled)
             {

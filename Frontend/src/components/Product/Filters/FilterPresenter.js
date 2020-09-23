@@ -1,11 +1,9 @@
 import React from "react";
 import "./filter.css";
-import Button from "@material-ui/core/Button";
 
 const FilterPresenter = (props) => {
   return (
     <React.Fragment>
-      {console.log("propara", props)}
       <h1 className="filter">Filters</h1>
       <form className="filter" onSubmit={props.handleSubmit}>
         <label>
