@@ -61,8 +61,18 @@ namespace ItStuff.Controllers
             };
 
             var products = await productService.GetUserProductsAsync(userId, paging);
+            var mappedproducts = mapper.Map<IEnumerable<ProductViewModel>>(products);
 
-            return Ok(new { userProducts = products, totalPages = paging.TotalPages });
+            return Ok(new { userProducts = mappedproducts, totalPages = paging.TotalPages });
+        }
+
+        [Authorize(Roles = "User,Admin")]
+        [HttpDelete("deleteproduct/{productId}")]
+        public async Task<IActionResult> DeleteProduct(Guid productId)
+        {
+            var deletedProduct = await productService.DeleteProductAsync(productId);
+
+            return Ok(deletedProduct);
         }
 
         [AllowAnonymous]

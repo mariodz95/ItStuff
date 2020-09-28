@@ -122,5 +122,13 @@ namespace Repository
                 return await query.AsNoTracking().ToListAsync();
             }
         }
+
+        public async Task<IProductModel> DeleteProductAsync(Guid productId)
+        {
+            var deletedProduct = await context.Products.FindAsync(productId);
+            context.Remove(deletedProduct);
+            await context.SaveChangesAsync();
+            return mapper.Map<IProductModel>(deletedProduct);
+        }
     }
 }

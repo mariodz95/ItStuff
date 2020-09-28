@@ -7,6 +7,7 @@ export const productService = {
   getProduct,
   getAll,
   getUserProducts,
+  productDelete,
 };
 
 function createProduct(product, images) {
@@ -69,4 +70,20 @@ function getUserProducts(userId, pageNumber, pageSize) {
     `${url}product/getuserproducts/${userId}&${pageNumber}&${pageSize}`,
     requestOptions
   ).then(handleResponse);
+}
+
+function productDelete(productId) {
+  let user = JSON.parse(localStorage.getItem("user"));
+
+  const requestOptions = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + user.token,
+    },
+  };
+
+  return fetch(`${url}product/deleteproduct/${productId}`, requestOptions).then(
+    handleResponse
+  );
 }

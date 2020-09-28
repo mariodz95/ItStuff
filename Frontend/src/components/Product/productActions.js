@@ -111,3 +111,27 @@ export const getUserProducts = (userId, pageCount, pageSize) => (dispatch) => {
     return { type: productConstant.GET_TOTAL_PAGES, totalPages };
   }
 };
+
+export const deleteProduct = (productId) => (dispatch) => {
+  dispatch(request({ productId }));
+
+  productService.productDelete(productId).then(
+    (product) => {
+      dispatch(success(product.id));
+    },
+    (error) => {
+      dispatch(failure(error));
+      dispatch(displayError(error));
+    }
+  );
+
+  function request() {
+    return { type: productConstant.DELETE_REQUEST };
+  }
+  function success(productId) {
+    return { type: productConstant.DELETE_SUCCESS, productId };
+  }
+  function failure(error) {
+    return { type: productConstant.DELETE_FAILURE, error };
+  }
+};

@@ -12,6 +12,8 @@ const initialState = newProduct
       pageCount: 1,
       pageSize: 10,
       totalPages: 1,
+      deleting: true,
+      deleteError: null,
     }
   : {};
 
@@ -62,6 +64,29 @@ export default function products(state = initialState, action) {
     case productConstant.GET_ALL_USER_PRODUCTS_FAILURE: {
       return { ...state, error: action.error };
     }
+    case productConstant.DELETE_REQUEST:
+      return {
+        ...state,
+        deleting: true,
+      };
+    case productConstant.DELETE_SUCCESS: {
+      return {
+        ...state,
+        userProductList: state.userProductList.filter(
+          (item) => item.id !== action.productId
+        ),
+      };
+    }
+    case productConstant.DELETE_FAILURE:
+      return {
+        ...state,
+        userProductList: state.userProductList.map((product) => {
+          if (product.id === action.productId) {
+            return { deleteError: action.error };
+          }
+          return product;
+        }),
+      };
     default:
       return state;
   }

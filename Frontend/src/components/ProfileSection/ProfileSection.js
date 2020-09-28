@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getUserProducts } from "../Product/productActions";
+import { getUserProducts, deleteProduct } from "../Product/productActions";
 import ProfileSectionPresenter from "./ProfileSectionPresenter";
 import ClipLoader from "react-spinners/ClipLoader";
 import { override } from "../../shared/spinner";
@@ -17,6 +17,10 @@ class ProfileSection extends Component {
 
   handlePagination = (e, value) => {
     this.props.getUserProducts(this.props.user.id, value, 10);
+  };
+
+  handleDelete = (id) => {
+    this.props.deleteProduct(id);
   };
 
   render() {
@@ -37,6 +41,7 @@ class ProfileSection extends Component {
             productList={this.props.userProducts}
             totalPages={this.props.totalPages}
             handlePagination={this.handlePagination}
+            handleDelete={this.handleDelete}
           />
         )}
       </div>
@@ -46,6 +51,7 @@ class ProfileSection extends Component {
 
 ProfileSection.propTypes = {
   getUserProducts: PropTypes.func.isRequired,
+  deleteProduct: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -55,7 +61,8 @@ const mapStateToProps = (state) => ({
   loading: state.products.loading,
 });
 
-const connectedProfileSection = connect(mapStateToProps, { getUserProducts })(
-  ProfileSection
-);
+const connectedProfileSection = connect(mapStateToProps, {
+  getUserProducts,
+  deleteProduct,
+})(ProfileSection);
 export { connectedProfileSection as ProfileSection };

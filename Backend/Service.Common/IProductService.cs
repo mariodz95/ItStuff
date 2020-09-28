@@ -13,5 +13,6 @@ namespace Service.Common
         Task<IProductModel> GetProductAsync(Guid productId);
         Task<IEnumerable<IProductModel>> GetAllAsync(IPaging paging, IFiltering filtering, ISorting sortObj, float fromPrice, float toPrice);
         Task<IEnumerable<IProductModel>> GetUserProductsAsync(Guid userId, IPaging paging);
+        Task<IProductModel> DeleteProductAsync(Guid productId);
     }
 }

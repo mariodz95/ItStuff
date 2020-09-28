@@ -14,5 +14,6 @@ namespace Repository.Common
         Task<IProductModel> GetProductAsync(Guid productId);
         Task<IEnumerable<ProductEntity>> GetAllAsync(IPaging paging, IFiltering filtering, ISorting sortObj, float fromPrice, float toPrice);
         Task<IEnumerable<ProductEntity>> GetProductsByUser(Guid userId, IPaging paging);
+        Task<IProductModel> DeleteProductAsync(Guid productId);
     }
 }

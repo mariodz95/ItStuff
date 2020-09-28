@@ -80,6 +80,7 @@ const Item = (props) => {
                     size="small"
                     variant="outlined"
                     color="primary"
+                    onClick={() => props.handleDelete(props.product.id)}
                     className={classes.margin}
                   >
                     Delete

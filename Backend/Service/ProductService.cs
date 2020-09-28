@@ -74,5 +74,10 @@ namespace Service
             var result = await productRepository.GetProductsByUser(userId, paging);
             return mapper.Map<IEnumerable<IProductModel>>(result);
         }
+
+        public async Task<IProductModel> DeleteProductAsync(Guid productId)
+        {
+            return await productRepository.DeleteProductAsync(productId);
+        }
     }
 }

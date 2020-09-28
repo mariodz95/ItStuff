@@ -9,6 +9,7 @@ const ProfileSectionPresenter = (props) => {
         totalPages={props.totalPages}
         handlePagination={props.handlePagination}
         profileSection={true}
+        handleDelete={props.handleDelete}
       />
     </div>
   );

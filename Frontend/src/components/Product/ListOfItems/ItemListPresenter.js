@@ -21,7 +21,11 @@ const ItemListPresenter = (props) => {
         <React.Fragment>
           {props.productList.map((item) => {
             return (
-              <Item product={item} profileSection={props.profileSection} />
+              <Item
+                handleDelete={props.handleDelete}
+                product={item}
+                profileSection={props.profileSection}
+              />
             );
           })}
           <Grid
